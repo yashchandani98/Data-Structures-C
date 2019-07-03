@@ -16,6 +16,11 @@ void postorder(node2 *tree);
 void preorder(node2 *tree);
 void inorder(node2 *tree);
 node2 *node(node2 *tree, int data);
+void countLeaf(node2 *tree);
+void countNode(node2 *tree);
+int search(node2 *tree,int data);
+void delete(node2 *tree, int data);
+int nodeCount=0,leafCount=0;
 int main(){
     int choice=0;
     printf("\n*****Welcome to Binary Tree Program*****");
@@ -86,5 +91,69 @@ void postorder(node2 *tree){
         postorder(tree->lchild);
         postorder(tree->rchild);
         printf("\n%d", tree->data);
+    }
+}
+void countNode(node2 *tree){
+    if(tree!=NULL){
+        if(tree->lchild!=NULL){
+            nodeCount++;
+            countNode(tree->lchild);
+        }
+        if(tree->rchild!=NULL){
+            nodeCount++;
+            countNode(tree->rchild);
+        }
+    }
+}
+void countLeaf(node2 *tree){
+    if(tree!=NULL)
+    {
+        if (tree->lchild == NULL && tree->rchild == NULL)
+            leafCount++;
+        else
+        {
+            countLeaf(tree->lchild);
+            countLeaf(tree->rchild);
+        }
+    }
+}
+int search(node2 *tree, int data){
+    if(tree!=NULL){
+        if(data < tree->data){
+            search(tree->lchild,data);
+        }
+        if (data > tree->data){
+            search(tree->rchild, data);
+        }
+        else{
+            printf("\nItem Found"); // Item Found
+        }
+    }
+    return 0;
+}
+void delete (node2 *tree, int data){
+    node2 *temp;
+    if (tree != NULL){
+        if (data < tree->data){
+            delete(tree->lchild, data);
+        }
+        if (data > tree->data){
+            delete(tree->rchild, data);
+        }
+        else{
+            temp=tree;
+            if ((temp->lchild == NULL) && (temp->lchild == NULL)){
+                temp=NULL;
+            }
+            else{
+                if((temp->lchild==NULL))
+                    tree=temp->rchild;
+                if ((temp->rchild == NULL))
+                    tree = temp->lchild;
+                else
+                    delete(temp->lchild,data);
+            }
+                free(temp);
+        }
     }
 }
