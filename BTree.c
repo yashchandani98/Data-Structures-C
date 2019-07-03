@@ -74,19 +74,15 @@ void inorder(node2* tree){
         inorder(tree->rchild);
     }
 }
-void preorder(node2 *tree)
-{
-    if (tree != NULL)
-    {
+void preorder(node2 *tree){
+    if (tree != NULL){
         printf("\n%d", tree->data);
         preorder(tree->lchild);
         preorder(tree->rchild);
     }
 }
-void postorder(node2 *tree)
-{
-    if (tree != NULL)
-    {
+void postorder(node2 *tree){
+    if (tree != NULL){
         postorder(tree->lchild);
         postorder(tree->rchild);
         printf("\n%d", tree->data);
